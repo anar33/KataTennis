@@ -8,7 +8,6 @@ package fr.patrick.lorin.katatennistest;
 import fr.patrick.lorin.katatennis.TennisJeu;
 import junit.framework.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Before;
 
 /**
@@ -73,7 +72,7 @@ public class TennisJeuTest
     @Test
     public void joueur1Gagne()
     {
-        creerScore(4,0);
+        creerPoints(4,0);
         
         String score = jeu.getScore();
         
@@ -83,7 +82,7 @@ public class TennisJeuTest
     @Test
     public void joueur2Gagne()
     {
-        creerScore(2,4);
+        creerPoints(2,4);
         
         String score = jeu.getScore();
         
@@ -93,7 +92,7 @@ public class TennisJeuTest
     @Test
     public void joueursEnEgalite()
     {
-        creerScore(3,3);
+        creerPoints(3,3);
         
         String score = jeu.getScore();
         
@@ -103,7 +102,7 @@ public class TennisJeuTest
     @Test
     public void joueur1AAvantage()
     {
-        creerScore(4,3);
+        creerPoints(4,3);
         
         String score = jeu.getScore();
         
@@ -113,7 +112,7 @@ public class TennisJeuTest
     @Test
     public void joueur2AAvantage()
     {
-        creerScore(3,4);
+        creerPoints(3,4);
         
         String score = jeu.getScore();
         
@@ -123,7 +122,7 @@ public class TennisJeuTest
     @Test
     public void joueur1GagneApresAvantage()
     {
-        creerScore(6,4);
+        creerPoints(6,4);
         
         String score = jeu.getScore();
         
@@ -133,14 +132,14 @@ public class TennisJeuTest
     @Test
     public void joueur2GagneApresAvantage()
     {
-        creerScore(4,6);
+        creerPoints(4,6);
         
         String score = jeu.getScore();
         
         Assert.assertEquals("J2 a gagné!!!", score);
     }
     
-    public void creerScore(int score1, int score2)
+    public void creerPoints(int score1, int score2)
     {
         for(int i = 0; i<score1; i++)
         {
