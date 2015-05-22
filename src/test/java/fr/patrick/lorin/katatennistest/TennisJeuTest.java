@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.patrick.lorin.katatennistest;
 
 import fr.patrick.lorin.katatennis.TennisJeu;
@@ -10,10 +5,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.Before;
 
-/**
- *
- * @author Patrick
- */
 public class TennisJeuTest
 {
     private TennisJeu jeu;
@@ -39,7 +30,7 @@ public class TennisJeuTest
     @Test
     public void joueur1MarqueUnPoint()
     {
-        jeu.joueur1Marque();
+        leJoueur1Marque(1);
         
         String score = jeu.getScore();
         
@@ -49,8 +40,7 @@ public class TennisJeuTest
     @Test
     public void joueur2MarqueDeuxPoints()
     {
-        jeu.joueur2Marque();
-        jeu.joueur2Marque();
+        leJoueur2Marque(2);
         
         String score = jeu.getScore();
         
@@ -60,9 +50,7 @@ public class TennisJeuTest
     @Test
     public void joueur1MarqueTroisPoints()
     {
-        jeu.joueur1Marque();
-        jeu.joueur1Marque();
-        jeu.joueur1Marque();
+        leJoueur1Marque(3);
         
         String score = jeu.getScore();
         
@@ -72,7 +60,7 @@ public class TennisJeuTest
     @Test
     public void joueur1Gagne()
     {
-        creerPoints(4,0);
+        leJoueur1Marque(4);
         
         String score = jeu.getScore();
         
@@ -82,7 +70,8 @@ public class TennisJeuTest
     @Test
     public void joueur2Gagne()
     {
-        creerPoints(2,4);
+        leJoueur1Marque(2);
+        leJoueur2Marque(4);
         
         String score = jeu.getScore();
         
@@ -92,7 +81,8 @@ public class TennisJeuTest
     @Test
     public void joueursEnEgalite()
     {
-        creerPoints(3,3);
+        leJoueur1Marque(3);
+        leJoueur2Marque(3);
         
         String score = jeu.getScore();
         
@@ -102,7 +92,8 @@ public class TennisJeuTest
     @Test
     public void joueur1AAvantage()
     {
-        creerPoints(4,3);
+        leJoueur2Marque(3);
+        leJoueur1Marque(4);
         
         String score = jeu.getScore();
         
@@ -112,7 +103,8 @@ public class TennisJeuTest
     @Test
     public void joueur2AAvantage()
     {
-        creerPoints(3,4);
+        leJoueur1Marque(3);
+        leJoueur2Marque(4);
         
         String score = jeu.getScore();
         
@@ -122,7 +114,9 @@ public class TennisJeuTest
     @Test
     public void joueur1GagneApresAvantage()
     {
-        creerPoints(6,4);
+        leJoueur1Marque(3);
+        leJoueur2Marque(4);
+        leJoueur1Marque(3);
         
         String score = jeu.getScore();
         
@@ -132,7 +126,9 @@ public class TennisJeuTest
     @Test
     public void joueur2GagneApresAvantage()
     {
-        creerPoints(4,6);
+        leJoueur2Marque(3);
+        leJoueur1Marque(4);
+        leJoueur2Marque(3);
         
         String score = jeu.getScore();
         
@@ -141,11 +137,21 @@ public class TennisJeuTest
     
     public void creerPoints(int score1, int score2)
     {
-        for(int i = 0; i<score1; i++)
+        leJoueur1Marque(score1);
+        leJoueur2Marque(score2);
+    }
+    
+    public void leJoueur1Marque(int nb)
+    {
+        for(int i = 0; i<nb; i++)
         {
             jeu.joueur1Marque();
         }
-        for(int i = 0; i<score2; i++)
+    }
+    
+    public void leJoueur2Marque(int nb)
+    {
+        for(int i = 0; i<nb; i++)
         {
             jeu.joueur2Marque();
         }

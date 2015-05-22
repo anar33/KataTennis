@@ -1,15 +1,15 @@
 package fr.patrick.lorin.katatennis;
 
-/**
- *
- * @author Patrick
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class TennisJeu
 {
     private int scoreJoueur1 = 0;
     private int scoreJoueur2 = 0;
     private String nomJoueur1 = "";
     private String nomJoueur2= "";
+    private ArrayList<String> listScore=new ArrayList<>(Arrays.asList("0","15","30","40"));
     
     public TennisJeu(String nomJ1, String nomJ2)
     {
@@ -31,7 +31,7 @@ public class TennisJeu
         {
             return "Avantage "+joueurAvecLePlusHautScore();
         }
-        return traduitScore(scoreJoueur1)+" - "+traduitScore(scoreJoueur2);
+        return traduireScore(scoreJoueur1)+" - "+traduireScore(scoreJoueur2);
     }
 
     public void joueur1Marque()
@@ -44,57 +44,48 @@ public class TennisJeu
         scoreJoueur2++;
     }
     
-    public boolean aUnGagnant()
+    private boolean aUnGagnant()
     {
-        if(scoreJoueur1 >= 4 && scoreJoueur1 >= scoreJoueur2 + 2 )
-        {
-            return true;
-        }
-        if(scoreJoueur2 >= 4 && scoreJoueur2 >= scoreJoueur1 + 2 )
-        {
-            return true;
-        }
-        return false;
+        return estGagnantJoueur1() || estGagnantJoueur2();
     }
     
-    public boolean aAvantage()
+    private boolean estGagnantJoueur1()
     {
-        if(scoreJoueur1>=3 && scoreJoueur2==scoreJoueur1+1)
-        {
-            return true;
-        }
-        if(scoreJoueur2>=3 && scoreJoueur1==scoreJoueur2+1)
-        {
-            return true;
-        }
-        return false;
+        return scoreJoueur1 >= 4 && scoreJoueur1 >= scoreJoueur2 + 2;
     }
     
-    public boolean estEnEgalite()
+    private boolean estGagnantJoueur2()
     {
-        if(scoreJoueur1 == scoreJoueur2 && scoreJoueur1 >= 3)
-        {
-            return true;
-        }
-        return false;
+        return scoreJoueur2 >= 4 && scoreJoueur2 >= scoreJoueur1 + 2;
     }
     
-    public String joueurAvecLePlusHautScore()
+    private boolean aAvantage()
+    {
+        return aAvantageJoueur1() || aAvantageJoueur2();
+    }
+    
+    private boolean aAvantageJoueur2()
+    {
+        return scoreJoueur1>=3 && scoreJoueur2==scoreJoueur1+1;
+    }
+    
+    private boolean aAvantageJoueur1()
+    {
+        return scoreJoueur2>=3 && scoreJoueur1==scoreJoueur2+1;
+    }
+    
+    private boolean estEnEgalite()
+    {
+        return scoreJoueur1 == scoreJoueur2 && scoreJoueur1 >= 3;
+    }
+    
+    private String joueurAvecLePlusHautScore()
     {
         return scoreJoueur1>scoreJoueur2?nomJoueur1:nomJoueur2;
     }
     
-    private String traduitScore(int score)
+    private String traduireScore(int score)
     {
-        switch(score)
-        {
-            case 1:
-                return "15";
-            case 2:
-                return "30";
-            case 3:
-                return "40";
-        }
-        return "0";
+        return listScore.get(score);
     }
 }
